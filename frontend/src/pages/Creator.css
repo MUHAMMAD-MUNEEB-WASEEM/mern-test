@@ -1,0 +1,14 @@
+.creator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    flex-direction: column;
+
+}
+
+.creator__form{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}

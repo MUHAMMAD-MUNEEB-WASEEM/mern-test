@@ -5,27 +5,24 @@ import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
 
-
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accountType, setAccountType] = useState("")
 
   let navigate = useNavigate();
 
-  const onLogin = async () => {
+  const onRegister = async () => {
     const credentials = {
       email,
       password,
+      accountType
     };
 
     await axios
-      .post("http://localhost:5000/api/user/login", credentials)
+      .post("http://localhost:5000/api/user/register", credentials)
       .then((response) => {
-        if (response.data.accountType === "admin") {
-          navigate("/admin-home");
-        } else if (response.data.accountType === "creator") {
-          navigate("/creator-home");
-        }
+        navigate('/login')
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -69,6 +66,18 @@ const Login = () => {
                   />
                 </div>
 
+                <div className="form-outline mb-3">
+                  <input
+                    type="text"
+                    id="form3Example4"
+                    className="form-control form-control-lg"
+                    placeholder="Enter Ownership"
+                    onChange={(e) => {
+                      setAccountType(e.target.value);
+                    }}
+                  />
+                </div>
+
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="form-check mb-0">
                     <input
@@ -91,39 +100,19 @@ const Login = () => {
                     type="button"
                     className="btn btn-primary btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
-                    onClick={onLogin}
+                    onClick={onRegister}
                   >
-                    Login
+                    Register
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
-                    Don't have an account?{" "}
-                    <Link to='register' className="link-danger">
-                      Register
-                    </Link>
+                    Got an account?{" "}
+                    <a href="/" className="link-danger">
+                      Login
+                    </a>
                   </p>
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          <div className="text-white mb-3 mb-md-0">
-            Copyright © 2020. All rights reserved.
-          </div>
-
-          <div>
-            <a href="/" className="text-white me-4">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="/" className="text-white me-4">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="/" className="text-white me-4">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="/" className="text-white">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
           </div>
         </div>
       </section>
@@ -131,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

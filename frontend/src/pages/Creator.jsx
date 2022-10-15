@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import storage from '../firebase'
+import './Creator.css'
+
 
 const Creator = () => {
 
@@ -53,18 +55,20 @@ const Creator = () => {
   return  (
   <div className="creator">
 
+
+
     <h1>Post</h1>
 
-    <form>
-      <label>Title: <input type="text" value={title} onChange={e=>setTitle(e.target.value)}/></label>
-      <label>Description: <input type="text" value={description} onChange={e=>setDescription(e.target.value)}/></label>
-      <label>Image: <input name="img" type="file" accept=".png, .jpg, .jpeg" onChange={e=>setImg(e.target.files[0])}/></label>
+    <form className="creator__form">
+      <input placeholder="Enter Title" type="text" value={title} onChange={e=>setTitle(e.target.value)}/>
+      <input placeholder="Enter Description" type="text" value={description} onChange={e=>setDescription(e.target.value)}/>
+      <input name="img" type="file" accept=".png, .jpg, .jpeg" onChange={e=>setImg(e.target.files[0])}/>
     </form>
 
-    <button onClick={handleSubmit}>Post</button>
-    <button className="addProduct__button" onClick={handleUpload}>Upload</button>
+    <button className="addProduct__button" onClick={handleUpload}>Image Upload</button>
 
-    <h1>Get</h1>
+    <button onClick={handleSubmit}>Post</button>
+
   </div>
   
   )

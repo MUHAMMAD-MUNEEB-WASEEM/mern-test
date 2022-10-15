@@ -19,7 +19,7 @@ const AdminHome = () => {
         .catch(err => {
             console.log(err)
         })
-},[])
+},[posts])
 
 const handledelete = async (id) => {
 
@@ -36,9 +36,9 @@ const handledelete = async (id) => {
 const handleUpdate = async (id) => {
 
   await axios
-  .delete("http://localhost:5000/api/post/" + id, {title, description})
+  .put("http://localhost:5000/api/post/" + id, {title, description})
   .then((response) => {
-    setPosts(response.data)
+    console.log(response)
   })
   .catch((error) => {
     console.log(error);
@@ -53,16 +53,18 @@ const handleUpdate = async (id) => {
               <h3>Description: {post.description}</h3>
               <button onClick={()=>handledelete(post._id)}>Delete</button>
 
-              <h2>Update</h2>
+              <h3 style={{paddingTop: "30px", paddingBottom: "30px"}}>Update</h3>
 
-              <form key={key}>
+              <form >
                   <label>Title: <input type="text" onChange={e=>setTitle(e.target.value)}/></label>
                   <label>Description: <input type="text" onChange={e=>setDescription(e.target.value)}/></label>
                   {/* <label>Image: <input name="img" type="file" accept=".png, .jpg, .jpeg" onChange={e=>setImg(e.target.files[0])}/></label> */}
                </form>
 
-              
-              <button >Update</button>
+              <div style={{padding: "20px 0px 20px 0px"}}>
+              <button onClick={()=>handleUpdate(post._id)}>Update</button>
+
+              </div>
 
           </div>
 
